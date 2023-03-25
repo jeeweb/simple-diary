@@ -25,7 +25,7 @@ const DiaryEditor = ({ onCreate }) => {
       authorInput.current.focus();
       return;
     }
-    if (state.content.length < 1) {
+    if (state.content.length < 5) {
       contentInput.current.focus();
       return;
     }
