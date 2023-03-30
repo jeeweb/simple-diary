@@ -1,20 +1,18 @@
 import { useState, useRef } from "react";
 
 const DiaryItem = ({
+  onRemove,
+  onEdit,
   id,
   author,
   content,
-  created_date,
   emotion,
-  onRemove,
-  onEdit,
+  created_date,
 }) => {
+  const localContentInput = useRef();
+  const [localContent, setLocalContent] = useState(content);
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
-  const localContentInput = useRef();
-
-  const [localContent, setLocalContent] = useState(content);
-
   const handleRemove = () => {
     if (window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)) {
       onRemove(id);
