@@ -45,19 +45,21 @@ const App = () => {
     setData((data) => [newItem, ...data]);
   }, []);
 
-  const onRemove = (targetId) => {
-    // console.log(`${targetId}가 삭제되었습니다`);
-    const newDiaryList = data.filter((it) => it.id !== targetId);
-    setData(newDiaryList);
-  };
+  const onRemove = useCallback((targetId) => {
+    /* 해당 코드 아래 코드로 최적화 작업
+      const newDiaryList = data.filter((it) => it.id !== targetId);
+      setData(newDiaryList);
+    */
+    setData((data) => data.filter((it) => it.id !== targetId));
+  }, []);
 
-  const onEdit = (targetId, newContent) => {
-    setData(
+  const onEdit = useCallback((targetId, newContent) => {
+    setData((data) =>
       data.map((it) =>
         it.id === targetId ? { ...it, content: newContent } : it
       )
     );
-  };
+  }, []);
 
   const getDiaryAnalysis = useMemo(() => {
     if (data.length === 0) {
